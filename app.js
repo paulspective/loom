@@ -1,6 +1,8 @@
 const addBtn = document.getElementById('add-btn');
 const urlInput = document.getElementById('image-url');
 const masonry = document.querySelector('.moodboard-masonry');
+const clearBtn = document.getElementById('clear-btn');
+const exportBtn = document.getElementById('export-btn');
 
 const savedImages = JSON.parse(localStorage.getItem('loomImages')) || [];
 savedImages.forEach(url => {
@@ -46,4 +48,25 @@ urlInput.addEventListener('keypress', e => {
     e.preventDefault();
     addImage();
   }
+});
+
+function clearImages() {
+  localStorage.removeItem('loomImages');
+  savedImages.length = 0;
+  masonry.innerHTML = '';
+  urlInput.placeholder = 'Paste image URL here';
+}
+
+clearBtn.addEventListener('click', clearImages);
+
+exportBtn.addEventListener('click', () => {
+  html2canvas(masonry, {
+    useCORS: true,
+    scale: 2
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'moodboard.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
 });
