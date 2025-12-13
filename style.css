@@ -28,6 +28,22 @@ body {
   transition: transform 0.3s;
 }
 
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .moodboard-masonry img:hover {
   transform: scale(1.02);
 }
@@ -38,15 +54,19 @@ body {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .moodboard-masonry {
     column-count: 2;
   }
-}
 
-@media (max-width: 500px) {
-  .moodboard-masonry {
-    column-count: 1;
+  #add-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  #image-url {
+    font-size: 0.85rem;
+    padding: 0.75rem;
   }
 }
 
