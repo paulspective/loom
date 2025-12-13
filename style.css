@@ -7,10 +7,11 @@
 
 body {
   padding: 1rem;
-  background: #f0f0f0;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   justify-content: center;
 }
 
@@ -21,11 +22,17 @@ body {
 
 .moodboard-masonry img {
   width: 100%;
+  max-width: 100%;
   margin-bottom: 12px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: block;
   transition: transform 0.3s;
+}
+
+.moodboard-masonry img:hover,
+.moodboard-masonry img:focus {
+  transform: scale(1.02);
 }
 
 .fade-in {
@@ -42,10 +49,6 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.moodboard-masonry img:hover {
-  transform: scale(1.02);
 }
 
 @media (max-width: 1200px) {
@@ -74,11 +77,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: #f3f6fc;
   width: 100%;
   max-width: 450px;
   padding-left: 1rem;
-  margin: 2rem 0 3rem;
+  margin: 5rem 0 3rem;
   border-radius: 50px;
 }
 
@@ -97,7 +100,7 @@ body {
   border: none;
   outline: none;
   padding: 1.2rem 2rem;
-  background-color: #e44836;
+  background-color: #185d88;
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
@@ -105,10 +108,37 @@ body {
   transition: transform 0.2s, background-color 0.2s;
 }
 
-#add-btn:hover {
-  background-color: #ff5945;
+#add-btn:active {
+  transform: scale(0.95);
 }
 
-#add-btn:active {
-  transform: scale(0.98);
+#clear-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  background-color: #f3f6fc;
+  padding: 0 0.75rem;
+  border-radius: 50%;
+  z-index: 100;
+  transition: background-color 0.2s;
+}
+
+#export-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  font-size: 2rem;
+  cursor: pointer;
+  background-color: #f3f6fc;
+  padding: 0 0.75rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+#clear-btn:hover,
+#export-btn:hover {
+  background-color: #e0e5ee;
 }
