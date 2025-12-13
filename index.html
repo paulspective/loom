@@ -6,8 +6,17 @@
   <title>Loom — Weave Your Inspiration</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
+
+  <div id="clear-btn">
+    <span class="material-symbols-outlined">clear_all</span>
+  </div>
+
+  <div id="export-btn">
+    <span class="material-symbols-outlined">file_export</span>
+  </div>
 
   <div class="input-area">
     <input type="text" id="image-url" placeholder="Paste image URL here" autofocus="on">
@@ -16,6 +25,7 @@
 
   <div class="moodboard-masonry"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
