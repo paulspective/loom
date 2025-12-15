@@ -102,3 +102,20 @@ exportBtn.addEventListener('click', () => {
     link.click();
   });
 });
+
+document.getElementById('share-btn').addEventListener('click', () => {
+  html2canvas(masonry, { useCORS: true, scale: 2 }).then(canvas => {
+    canvas.toBlob(blob => {
+      const file = new File([blob], 'moodboard.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          files: [file],
+          title: 'My moodboard',
+          text: 'Check out my moodboard from Loom!'
+        });
+      } else {
+        alert('Sharing is not allowed on this device/browser.');
+      }
+    });
+  });
+});
