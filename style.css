@@ -178,7 +178,7 @@ body {
 }
 
 .action #export-btn,
-#share-btn {
+.action #share-btn {
   font-size: 1rem;
   cursor: pointer;
   color: #333;
