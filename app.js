@@ -16,10 +16,15 @@ function createMoodboardItem(url, fade = false) {
 
   const removeBtn = document.createElement('button');
   removeBtn.classList.add('remove-btn');
+  removeBtn.title = 'Remove image';
   removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
 
   removeBtn.addEventListener('click', () => {
-    wrapper.remove();
+    wrapper.classList.add('fade-out');
+    wrapper.addEventListener('transitionend', () => {
+      wrapper.remove();
+    });
+
     const index = savedImages.indexOf(url);
     if (index > -1) {
       savedImages.splice(index, 1);
@@ -72,7 +77,15 @@ urlInput.addEventListener('keypress', e => {
 function clearImages() {
   localStorage.removeItem('loomImages');
   savedImages.length = 0;
-  masonry.innerHTML = '';
+
+  const items = masonry.querySelectorAll('.moodboard-item');
+  items.forEach(item => {
+    item.classList.add('fade-out');
+    item.addEventListener('transitionend', () => {
+      item.remove();
+    });
+  });
+
   urlInput.placeholder = 'Paste image URL here';
 }
 
