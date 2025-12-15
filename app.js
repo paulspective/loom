@@ -75,6 +75,9 @@ urlInput.addEventListener('keypress', e => {
 });
 
 function clearImages() {
+  const confirmed = confirm('Are you sure you want to clear the entire moodboard?');
+  if (!confirmed) return;
+
   localStorage.removeItem('loomImages');
   savedImages.length = 0;
 
