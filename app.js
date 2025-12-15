@@ -5,10 +5,35 @@ const clearBtn = document.getElementById('clear-btn');
 const exportBtn = document.getElementById('export-btn');
 
 const savedImages = JSON.parse(localStorage.getItem('loomImages')) || [];
-savedImages.forEach(url => {
+
+function createMoodboardItem(url, fade = false) {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('moodboard-item');
+
   const img = document.createElement('img');
   img.src = url;
-  masonry.appendChild(img);
+  if (fade) img.classList.add('fade-in');
+
+  const removeBtn = document.createElement('button');
+  removeBtn.classList.add('remove-btn');
+  removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
+
+  removeBtn.addEventListener('click', () => {
+    wrapper.remove();
+    const index = savedImages.indexOf(url);
+    if (index > -1) {
+      savedImages.splice(index, 1);
+      localStorage.setItem('loomImages', JSON.stringify(savedImages));
+    }
+  });
+
+  wrapper.appendChild(img);
+  wrapper.appendChild(removeBtn);
+  return wrapper;
+}
+
+savedImages.forEach(url => {
+  masonry.appendChild(createMoodboardItem(url));
 });
 
 function validateImage(url, callback) {
@@ -24,14 +49,9 @@ function addImage() {
 
   validateImage(url, (isValid) => {
     if (isValid) {
-      const img = document.createElement('img');
-      img.src = url;
-      img.classList.add('fade-in');
-      masonry.appendChild(img);
-
+      masonry.appendChild(createMoodboardItem(url, true));
       savedImages.push(url);
       localStorage.setItem('loomImages', JSON.stringify(savedImages));
-
       urlInput.value = '';
       urlInput.placeholder = 'Paste image URL here';
     } else {
@@ -42,7 +62,6 @@ function addImage() {
 }
 
 addBtn.addEventListener('click', addImage);
-
 urlInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
     e.preventDefault();
