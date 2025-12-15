@@ -149,32 +149,50 @@ body {
 }
 
 #clear-btn {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
   font-size: 2rem;
   cursor: pointer;
   background-color: #f3f6fc;
-  padding: 0 0.75rem;
+  padding: 0 0.8rem;
   border-radius: 50%;
   z-index: 100;
   transition: background-color 0.2s;
 }
 
-#export-btn {
-  position: absolute;
+#clear-btn:hover {
+  background-color: #e0e5ee;
+}
+
+.action {
+  position: fixed;
   top: 20px;
   right: 20px;
   z-index: 100;
-  font-size: 2rem;
-  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
   background-color: #f3f6fc;
-  padding: 0 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+}
+
+.action #export-btn,
+#share-btn {
+  font-size: 1rem;
+  cursor: pointer;
+  color: #333;
+  padding: 0.4rem;
   border-radius: 50%;
   transition: background-color 0.2s;
 }
 
-#clear-btn:hover,
-#export-btn:hover {
+.action #export-btn:hover,
+.action #share-btn:hover {
   background-color: #e0e5ee;
+}
+
+#export-btn span,
+#share-btn span {
+  vertical-align: middle;
 }
