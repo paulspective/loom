@@ -17,6 +17,7 @@ Loom is a simple moodboard web app that lets you collect, organize, and export i
 - Remove individual images via a subtle **X** action
 - Clear the entire moodboard in one click
 - Export the full board as a high-resolution PNG using `html2canvas`
+- Share your moodboard via supported apps
 - Automatic persistence with `localStorage` so your board survives refreshes
 
 ---
