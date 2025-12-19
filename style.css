@@ -10,7 +10,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 1rem; */
   position: relative;
   justify-content: center;
 }
@@ -58,7 +57,7 @@ body {
 
 .moodboard-masonry img:hover,
 .moodboard-masonry img:focus {
-  transform: scale(1.02);
+  transform: scale(1.02) rotateZ(-1deg);
 }
 
 .fade-in {
@@ -68,7 +67,7 @@ body {
 .fade-out {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 @keyframes fadeIn {
