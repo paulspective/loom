@@ -1,4 +1,10 @@
 export async function exportMoodboard(masonry) {
+  const images = masonry.querySelectorAll('img');
+  if (images.length === 0) {
+    alert('No images to export!');
+    return;
+  }
+
   const canvas = await html2canvas(masonry, {
     useCORS: true,
     scale: 2
@@ -11,6 +17,12 @@ export async function exportMoodboard(masonry) {
 }
 
 export async function shareMoodboard(masonry) {
+  const images = masonry.querySelectorAll('img');
+  if (images.length === 0) {
+    alert('No images to share!');
+    return;
+  }
+
   const canvas = await html2canvas(masonry, {
     useCORS: true,
     scale: 2
