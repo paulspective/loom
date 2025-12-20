@@ -46,6 +46,12 @@ dom.urlInput.addEventListener('keypress', e => {
 });
 
 dom.clearBtn.addEventListener('click', () => {
+  const images = dom.masonry.querySelectorAll('img');
+  if (images.length === 0) {
+    alert('No images to clear!');
+    return;
+  }
+
   if (!confirm('Clear the entire moodboard?')) return;
 
   clearStoredImages();
