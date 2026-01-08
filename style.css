@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #fff;
+  background: #cdc9f3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +40,7 @@ body {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #f3f6fc;
+  background: #e2e0F9;
   color: #000;
   border: none;
   border-radius: 50%;
@@ -114,9 +114,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f3f6fc;
+  background-color: #e2e0f9b1;
   padding-left: 1rem;
-  margin: 5rem 0 3rem;
+  margin: 5rem 0 1rem;
   border-radius: 50px;
 }
 
@@ -135,8 +135,8 @@ body {
   border: none;
   outline: none;
   padding: 1.2rem 2rem;
-  background-color: #185d88;
-  color: #fff;
+  background-color: #4d3885;
+  color: #d3d3d3;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 50px;
@@ -147,21 +147,34 @@ body {
   transform: scale(0.95);
 }
 
+.empty-message {
+  font-size: 1.1rem;
+  color: #4d3885cc;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.hidden {
+  opacity: 0;
+}
+
 #clear-btn {
   position: fixed;
   top: 20px;
   left: 20px;
-  font-size: 2rem;
   cursor: pointer;
-  background-color: #f3f6fc;
-  padding: 0 0.8rem;
+  background-color: #c4b0f9;
+  color: #4d3885;
+  padding: 0.6rem;
   border-radius: 50%;
   z-index: 100;
   transition: background-color 0.2s;
 }
 
-#clear-btn:hover {
-  background-color: #e0e5ee;
+#clear-btn span {
+  font-size: 2rem;
+  vertical-align: middle;
 }
 
 .action {
@@ -171,27 +184,35 @@ body {
   z-index: 100;
   display: flex;
   gap: 0.5rem;
-  background-color: #f3f6fc;
-  padding: 0.4rem 0.8rem;
+  background-color: #c4b0f9;
+  padding: 0.5rem 0.82rem;
   border-radius: 50px;
+}
+
+.action #export-btn {
+  border-radius: 20px 8px 8px 20px;
+}
+
+.action #share-btn {
+  border-radius: 8px 20px 20px 8px;
 }
 
 .action #export-btn,
 .action #share-btn {
-  font-size: 1rem;
   cursor: pointer;
-  color: #333;
-  padding: 0.4rem;
-  border-radius: 50%;
+  color: #d3d3d3;
+  padding: 0.5rem 0.7rem;
+  background-color: #4d3885;
   transition: background-color 0.2s;
 }
 
-.action #export-btn:hover,
-.action #share-btn:hover {
-  background-color: #e0e5ee;
+#export-btn span {
+  margin-left: 0.2rem;
 }
 
 #export-btn span,
 #share-btn span {
+  font-size: 1.5rem;
+  margin-bottom: 0.1rem;
   vertical-align: middle;
 }
