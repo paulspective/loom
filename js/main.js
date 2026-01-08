@@ -1,13 +1,14 @@
 import * as dom from './dom.js';
 import { loadImages, saveImages, clearStoredImages } from './storage.js';
 import { validateImage } from './validation.js';
-import { createMoodboardItem } from './moodboard.js';
+import { createMoodboardItem, updateEmptyMessage } from './moodboard.js';
 import { exportMoodboard, shareMoodboard } from './export.js';
 
 const images = loadImages();
 
 images.forEach(url => {
   createMoodboardItem({ url, images, masonry: dom.masonry });
+  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
 });
 
 async function addImage() {
@@ -32,8 +33,10 @@ async function addImage() {
     fade: true
   });
 
+  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
+
   dom.urlInput.value = '';
-  dom.urlInput.placeholder = 'Paste image URL here';
+  dom.urlInput.placeholder = 'Image URL';
 }
 
 dom.addBtn.addEventListener('click', addImage);
@@ -46,13 +49,12 @@ dom.urlInput.addEventListener('keypress', e => {
 });
 
 dom.clearBtn.addEventListener('click', () => {
-  const images = dom.masonry.querySelectorAll('img');
   if (images.length === 0) {
     alert('No images to clear!');
     return;
   }
 
-  if (!confirm('Clear the entire moodboard?')) return;
+  if (!confirm('Unweave everything?')) return;
 
   clearStoredImages();
   images.length = 0;
@@ -63,6 +65,8 @@ dom.clearBtn.addEventListener('click', () => {
       item.classList.add('fade-out');
       item.addEventListener('transitionend', () => item.remove());
     });
+
+  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
 });
 
 dom.exportBtn.addEventListener('click', () =>
