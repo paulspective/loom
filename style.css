@@ -6,12 +6,12 @@
 }
 
 body {
-  background: #cdc9f3;
+  background: #e2e0f9;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   justify-content: center;
+  position: relative;
 }
 
 .moodboard-masonry {
@@ -22,7 +22,6 @@ body {
 
 .moodboard-masonry img {
   width: 100%;
-  max-width: 100%;
   margin-bottom: 12px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -40,12 +39,12 @@ body {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #e2e0F9;
-  color: #000;
+  background: #fff7ff;
+  color: #4b2e83;
   border: none;
   border-radius: 50%;
-  padding: 0 0.75rem;
-  font-size: 2rem;
+  padding: 0.7rem;
+  font-size: 1rem;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.2s;
@@ -114,9 +113,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e2e0f9b1;
+  background-color: rgba(255, 255, 255, 0.42);
   padding-left: 1rem;
-  margin: 5rem 0 1rem;
+  margin: 6rem 0 1rem;
   border-radius: 50px;
 }
 
@@ -135,8 +134,8 @@ body {
   border: none;
   outline: none;
   padding: 1.2rem 2rem;
-  background-color: #4d3885;
-  color: #d3d3d3;
+  background-color: #4b2e83;
+  color: #ffffffe6;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 50px;
@@ -144,12 +143,12 @@ body {
 }
 
 #add-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .empty-message {
   font-size: 1.1rem;
-  color: #4d3885cc;
+  color: #4b2e83cc;
   text-align: center;
   opacity: 1;
   transition: opacity 0.3s;
@@ -160,59 +159,72 @@ body {
 }
 
 #clear-btn {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 20px;
   cursor: pointer;
-  background-color: #c4b0f9;
-  color: #4d3885;
-  padding: 0.6rem;
+  background-color: #c8b3fd;
+  color: #4b2e83;
+  padding: 0.7rem;
   border-radius: 50%;
-  z-index: 100;
   transition: background-color 0.2s;
 }
 
+#clear-btn:hover {
+  background-color: #d3c4f0;
+}
+
 #clear-btn span {
-  font-size: 2rem;
+  font-size: 1.6rem;
   vertical-align: middle;
 }
 
 .action {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 100;
   display: flex;
-  gap: 0.5rem;
-  background-color: #c4b0f9;
-  padding: 0.5rem 0.82rem;
-  border-radius: 50px;
+  gap: 3px;
 }
 
-.action #export-btn {
-  border-radius: 20px 8px 8px 20px;
+#share-btn {
+  border-radius: 50px 12px 12px 50px;
+  padding: 0.9rem 1.2rem;
 }
 
-.action #share-btn {
-  border-radius: 8px 20px 20px 8px;
-}
-
-.action #export-btn,
-.action #share-btn {
-  cursor: pointer;
-  color: #d3d3d3;
-  padding: 0.5rem 0.7rem;
-  background-color: #4d3885;
-  transition: background-color 0.2s;
+#export-btn {
+  border-radius: 12px 50px 50px 12px;
+  padding: 0.9rem 0.7rem;
 }
 
 #export-btn span {
-  margin-left: 0.2rem;
+  margin-right: 2px;
 }
 
-#export-btn span,
-#share-btn span {
-  font-size: 1.5rem;
-  margin-bottom: 0.1rem;
+#share-btn,
+#export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #c8b3fd;
+  color: #4b2e83;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#share-btn:hover,
+#export-btn:hover {
+  background-color: #d3c4f0;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
   vertical-align: middle;
+}
+
+.btn-text {
+  font-size: 1rem;
 }
