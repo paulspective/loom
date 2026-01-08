@@ -31,16 +31,6 @@ The layout and styling are heavily inspired by **Google’s Material Design lang
 
 ---
 
-## 🚀 Getting Started
-Clone the repo and open `index.html` in your browser, or serve with a local web server.
-
-```bash
-git clone https://github.com/paulspective/loom.git
-cd loom
-```
-
----
-
 ## 🧠 Why Loom?
 Loom was built as a lightweight, distraction-free way to capture visual ideas quickly.  
 No accounts, no clutter — just collect, arrange, and export inspiration when you need it.
@@ -56,4 +46,4 @@ No accounts, no clutter — just collect, arrange, and export inspiration when y
 ## 🧵 Final Thoughts
 Loom is a small tool by design. Fast to use, easy to understand, and focused on visuals first.
 
-Open `index.html`, start weaving, and let the ideas stack up.
+Open loom, start weaving, and let the ideas stack up.
