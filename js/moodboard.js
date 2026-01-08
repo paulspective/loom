@@ -1,4 +1,5 @@
 import { saveImages } from './storage.js';
+import { emptyMessage } from './dom.js';
 
 export function createMoodboardItem({ url, images, masonry, fade = false }) {
   const wrapper = document.createElement('div');
@@ -24,8 +25,15 @@ export function createMoodboardItem({ url, images, masonry, fade = false }) {
       images.splice(index, 1);
       saveImages(images);
     }
+
+    updateEmptyMessage(images);
   });
 
   wrapper.append(img, removeBtn);
   masonry.appendChild(wrapper);
+  updateEmptyMessage(images);
+}
+
+export function updateEmptyMessage(images) {
+  emptyMessage.classList.toggle('hidden', images.length > 0);
 }
