@@ -10,26 +10,28 @@
 </head>
 <body>
 
-  <div id="clear-btn" title="Clear moodboard" aria-label="Clear entire moodboard">
+  <div id="clear-btn" title="Clear weave" aria-label="Clear entire moodboard">
     <span class="material-symbols-outlined">clear_all</span>
   </div>
 
   <div class="action">
-    <div id="export-btn" title="Export moodboard" aria-label="Export moodboard as image">
+    <div id="export-btn" title="Export as PNG" aria-label="Export moodboard as image">
       <span class="material-symbols-outlined">file_export</span>
     </div>
 
-    <div id="share-btn" title="Share moodboard" aria-label="Share moodboard">
+    <div id="share-btn" title="Weave & Share" aria-label="Share moodboard">
       <span class="material-symbols-outlined">share</span>
     </div>
   </div>
 
   <div class="input-wrapper">
     <div class="input-area">
-      <input type="text" id="image-url" placeholder="Paste image URL here" autofocus="on">
-      <button id="add-btn">Add Image</button>
+      <input type="text" id="image-url" placeholder="Image URL" autofocus="on">
+      <button id="add-btn">Add to weave</button>
     </div>
   </div>
+
+  <div class="empty-message">Nothing here yet. Start weaving.</div>
 
   <div class="moodboard-masonry">
   </div>
