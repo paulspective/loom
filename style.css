@@ -150,12 +150,11 @@ body {
   font-size: 1.1rem;
   color: #4b2e83cc;
   text-align: center;
-  opacity: 1;
-  transition: opacity 0.3s;
+  margin: 1rem 0;
 }
 
 .hidden {
-  opacity: 0;
+  display: none;
 }
 
 #clear-btn {
