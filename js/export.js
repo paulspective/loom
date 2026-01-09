@@ -1,7 +1,7 @@
 export async function exportMoodboard(masonry) {
   const images = masonry.querySelectorAll('img');
   if (images.length === 0) {
-    alert('No images to export!');
+    alert('Nothing to export yet.');
     return;
   }
 
@@ -19,7 +19,7 @@ export async function exportMoodboard(masonry) {
 export async function shareMoodboard(masonry) {
   const images = masonry.querySelectorAll('img');
   if (images.length === 0) {
-    alert('No images to share!');
+    alert('There\'s nothing to share yet.');
     return;
   }
 
