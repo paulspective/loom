@@ -8,15 +8,15 @@ const images = loadImages();
 
 images.forEach(url => {
   createMoodboardItem({ url, images, masonry: dom.masonry });
-  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
 });
+
+updateEmptyMessage(images, dom.masonry);
 
 async function addImage() {
   const url = dom.urlInput.value.trim();
   if (!url) return;
 
   const isValid = await validateImage(url);
-
   if (!isValid) {
     dom.urlInput.value = '';
     dom.urlInput.placeholder = 'Invalid image URL';
@@ -33,7 +33,7 @@ async function addImage() {
     fade: true
   });
 
-  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
+  updateEmptyMessage(images, dom.masonry);
 
   dom.urlInput.value = '';
   dom.urlInput.placeholder = 'Image URL';
@@ -50,7 +50,7 @@ dom.urlInput.addEventListener('keypress', e => {
 
 dom.clearBtn.addEventListener('click', () => {
   if (images.length === 0) {
-    alert('No images to clear!');
+    alert('Nothing to unweave yet.');
     return;
   }
 
@@ -66,7 +66,7 @@ dom.clearBtn.addEventListener('click', () => {
       item.addEventListener('transitionend', () => item.remove());
     });
 
-  updateEmptyMessage(dom.masonry.querySelectorAll('.moodboard-item'));
+  updateEmptyMessage(images, dom.masonry);
 });
 
 dom.exportBtn.addEventListener('click', () =>
