@@ -1,18 +1,11 @@
 import * as dom from './dom.js';
-import { loadImages, saveImages, clearStoredImages } from './storage.js';
 import { validateImage } from './validation.js';
 import { createMoodboardItem, updateEmptyMessage } from './moodboard.js';
 import { exportMoodboard, shareMoodboard } from './export.js';
 
-const images = loadImages();
+const images = [];
 
-images.forEach(url => {
-  createMoodboardItem({ url, images, masonry: dom.masonry });
-});
-
-updateEmptyMessage(images, dom.masonry);
-
-async function addImage() {
+async function addImageFromURL() {
   const url = dom.urlInput.value.trim();
   if (!url) return;
 
@@ -24,7 +17,6 @@ async function addImage() {
   }
 
   images.push(url);
-  saveImages(images);
 
   createMoodboardItem({
     url,
@@ -33,19 +25,49 @@ async function addImage() {
     fade: true
   });
 
-  updateEmptyMessage(images, dom.masonry);
-
   dom.urlInput.value = '';
   dom.urlInput.placeholder = 'Image URL';
+
+  updateEmptyMessage(images, dom.masonry);
 }
 
-dom.addBtn.addEventListener('click', addImage);
+function addImageFromFile(file) {
+  if (!file || !file.type.startsWith('image/')) return;
 
-dom.urlInput.addEventListener('keypress', e => {
+  const blobUrl = URL.createObjectURL(file);
+  images.push(blobUrl);
+
+  createMoodboardItem({
+    url: blobUrl,
+    images,
+    masonry: dom.masonry,
+    fade: true,
+    revokeOnRemove: true
+  });
+
+  updateEmptyMessage(images, dom.masonry);
+}
+
+dom.addBtn.addEventListener('click', addImageFromURL);
+
+dom.urlInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    addImage();
+    addImageFromURL();
   }
+});
+
+dom.uploadBtn.addEventListener('click', () => {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+
+  input.onchange = () => {
+    const file = input.files[0];
+    addImageFromFile(file);
+  };
+
+  input.click();
 });
 
 dom.clearBtn.addEventListener('click', () => {
@@ -56,16 +78,11 @@ dom.clearBtn.addEventListener('click', () => {
 
   if (!confirm('Unweave everything?')) return;
 
-  clearStoredImages();
-  images.length = 0;
-
   dom.masonry
     .querySelectorAll('.moodboard-item')
-    .forEach(item => {
-      item.classList.add('fade-out');
-      item.addEventListener('transitionend', () => item.remove());
-    });
+    .forEach(item => item.remove());
 
+  images.length = 0;
   updateEmptyMessage(images, dom.masonry);
 });
 
@@ -76,3 +93,13 @@ dom.exportBtn.addEventListener('click', () =>
 dom.shareBtn.addEventListener('click', () =>
   shareMoodboard(dom.masonry)
 );
+
+window.addEventListener('beforeunload', e => {
+  const hasItems = dom.masonry.querySelector('.moodboard-item') !== null;
+  if (!hasItems) return;
+
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+updateEmptyMessage(images, dom.masonry);
