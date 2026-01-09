@@ -244,4 +244,5 @@ body {
 
 .btn-text {
   font-size: 1rem;
+  user-select: none;
 }
