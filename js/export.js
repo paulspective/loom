@@ -1,3 +1,5 @@
+import { masonry } from './dom.js';
+
 export async function exportMoodboard(masonry) {
   const images = masonry.querySelectorAll('img');
   if (images.length === 0) {
@@ -5,9 +7,13 @@ export async function exportMoodboard(masonry) {
     return;
   }
 
+  masonry.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.remove('fade-in');
+  });
+
   const canvas = await html2canvas(masonry, {
     useCORS: true,
-    scale: 2
+    scale: 1
   });
 
   const link = document.createElement('a');
@@ -23,9 +29,13 @@ export async function shareMoodboard(masonry) {
     return;
   }
 
+  masonry.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.remove('fade-in');
+  });
+
   const canvas = await html2canvas(masonry, {
     useCORS: true,
-    scale: 2
+    scale: 1
   });
 
   return new Promise(resolve => {
