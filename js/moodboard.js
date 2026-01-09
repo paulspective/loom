@@ -18,6 +18,8 @@ export function createMoodboardItem({ url, images, masonry, fade = false }) {
     wrapper.classList.add('fade-out');
     wrapper.addEventListener('transitionend', () => {
       wrapper.remove();
+
+      updateEmptyMessage(images, masonry);
     });
 
     const index = images.indexOf(url);
@@ -26,14 +28,19 @@ export function createMoodboardItem({ url, images, masonry, fade = false }) {
       saveImages(images);
     }
 
-    updateEmptyMessage(images);
+    updateEmptyMessage(images, masonry);
   });
 
   wrapper.append(img, removeBtn);
+
   masonry.appendChild(wrapper);
-  updateEmptyMessage(images);
+
+  updateEmptyMessage(images, masonry);
 }
 
-export function updateEmptyMessage(images) {
-  emptyMessage.classList.toggle('hidden', images.length > 0);
+export function updateEmptyMessage(images, masonry) {
+  const hasItems = images.length > 0;
+  emptyMessage.textContent = 'Nothing here yet. Start weaving.';
+  emptyMessage.classList.toggle('hidden', hasItems);
+  masonry.classList.toggle('has-items', hasItems);
 }
