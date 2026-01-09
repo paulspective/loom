@@ -13,7 +13,7 @@ export async function exportMoodboard(masonry) {
 
   const canvas = await html2canvas(masonry, {
     useCORS: true,
-    scale: 1
+    scale: 2
   });
 
   const link = document.createElement('a');
@@ -35,7 +35,7 @@ export async function shareMoodboard(masonry) {
 
   const canvas = await html2canvas(masonry, {
     useCORS: true,
-    scale: 1
+    scale: 2
   });
 
   return new Promise(resolve => {
