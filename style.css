@@ -221,6 +221,7 @@ body {
 
 .material-symbols-outlined {
   font-size: 20px;
+  user-select: none;
   vertical-align: middle;
 }
 
