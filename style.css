@@ -105,7 +105,7 @@ body {
 
 .input-wrapper {
   width: 100%;
-  max-width: 450px;
+  max-width: 480px;
   padding: 1rem;
 }
 
@@ -114,9 +114,26 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.42);
-  padding-left: 1rem;
+  padding: 0 0 0 0.4rem;
   margin: 6rem 0 1rem;
   border-radius: 50px;
+}
+
+#upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4b2e83;
+  background-color: #c8b3fd;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0.85rem;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+#upload-btn:hover {
+  background-color: #d3c4f0;
 }
 
 #image-url {
