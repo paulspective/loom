@@ -5,3 +5,4 @@ export const clearBtn = document.getElementById('clear-btn');
 export const exportBtn = document.getElementById('export-btn');
 export const shareBtn = document.getElementById('share-btn');
 export const emptyMessage = document.querySelector('.empty-message');
+export const uploadBtn = document.getElementById('upload-btn');
