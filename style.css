@@ -200,21 +200,21 @@ body {
   top: 20px;
   right: 20px;
   display: flex;
-  gap: 3px;
+  gap: 2px;
 }
 
 #share-btn {
-  border-radius: 50px 12px 12px 50px;
+  border-radius: 50px 5px 5px 50px;
   padding: 0.9rem 1.2rem;
 }
 
 #export-btn {
-  border-radius: 12px 50px 50px 12px;
+  border-radius: 5px 50px 50px 5px;
   padding: 0.9rem 0.7rem;
 }
 
 #export-btn span {
-  margin-right: 2px;
+  margin-right: 3px;
 }
 
 #share-btn,
