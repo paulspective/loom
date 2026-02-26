@@ -1,3 +1,37 @@
+:root {
+  --bg: #e2e0f9;
+  --masonry-bg: transparent;
+  --img-shadow: rgba(0, 0, 0, 0.15);
+  --btn-bg: #4b2e83;
+  --btn-color: #ffffffe6;
+  --btn-hover-bg: #3a2370;
+  --input-bg: rgba(255, 255, 255, 0.42);
+  --upload-btn-bg: #c8b3fd;
+  --upload-btn-color: #4b2e83;
+  --upload-btn-hover-bg: #d3c4f0;
+  --remove-btn-bg: #fff7ff;
+  --remove-btn-color: #4b2e83;
+  --empty-msg-color: #4b2e83cc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141118;
+    --masonry-bg: transparent;
+    --img-shadow: rgba(0, 0, 0, 0.6);
+    --btn-bg: #4b2e83;
+    --btn-color: #e9ddff;
+    --btn-hover-bg: #5b3ca5;
+    --input-bg: rgba(75, 46, 131, 0.25);
+    --upload-btn-bg: #c8b3fd;
+    --upload-btn-color: #1C0259;
+    --upload-btn-hover-bg: #d3c4f0;
+    --remove-btn-bg: #2a1b47;
+    --remove-btn-color: #c8b3fd;
+    --empty-msg-color: #c8b3fdcc;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +40,7 @@
 }
 
 body {
-  background: #e2e0f9;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,13 +52,14 @@ body {
   column-count: 4;
   column-gap: 12px;
   padding: 1rem;
+  background: var(--masonry-bg);
 }
 
 .moodboard-masonry img {
   width: 100%;
   margin-bottom: 12px;
   border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px var(--img-shadow);
   display: block;
   transition: transform 0.3s;
 }
@@ -39,8 +74,8 @@ body {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #fff7ff;
-  color: #4b2e83;
+  background: var(--remove-btn-bg);
+  color: var(--remove-btn-color);
   border: none;
   border-radius: 50%;
   padding: 0.7rem;
@@ -103,7 +138,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.42);
+  background-color: var(--input-bg);
   padding: 0 0 0 0.25rem;
   margin: 6rem 0 1rem;
   border-radius: 50px;
@@ -114,8 +149,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #4b2e83;
-  background-color: #c8b3fd;
+  color: var(--upload-btn-color);
+  background-color: var(--upload-btn-bg);
   border-radius: 50%;
   font-size: 1.5rem;
   padding: 0.8rem;
@@ -123,7 +158,7 @@ body {
 }
 
 #upload-btn:hover {
-  background-color: #d3c4f0;
+  background-color: var(--upload-btn-hover-bg);
 }
 
 #image-url {
@@ -141,8 +176,8 @@ body {
   border: none;
   outline: none;
   padding: 1rem 1.5rem;
-  background-color: #4b2e83;
-  color: #ffffffe6;
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
   font-size: 0.90rem;
   cursor: pointer;
   border-radius: 50px;
@@ -155,7 +190,7 @@ body {
 
 .empty-message {
   font-size: 1rem;
-  color: #4b2e83cc;
+  color: var(--empty-msg-color);
   text-align: center;
   margin: 1rem 0;
 }
@@ -169,15 +204,15 @@ body {
   top: 20px;
   left: 20px;
   cursor: pointer;
-  background-color: #c8b3fd;
-  color: #4b2e83;
+  background-color: var(--upload-btn-bg);
+  color: var(--upload-btn-color);
   padding: 0.8rem 0.9rem;
   border-radius: 50%;
   transition: background-color 0.2s;
 }
 
 #clear-btn:hover {
-  background-color: #d3c4f0;
+  background-color: var(--upload-btn-hover-bg);
 }
 
 #clear-btn span {
@@ -193,6 +228,25 @@ body {
   gap: 2px;
 }
 
+#share-btn,
+#export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--upload-btn-bg);
+  color: var(--upload-btn-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#share-btn:hover,
+#export-btn:hover {
+  background-color: var(--upload-btn-hover-bg);
+}
+
 #share-btn {
   border-radius: 50px 5px 5px 50px;
   padding: 0.8rem 1.2rem;
@@ -205,25 +259,6 @@ body {
 
 #export-btn span {
   margin-right: 3px;
-}
-
-#share-btn,
-#export-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: #c8b3fd;
-  color: #4b2e83;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-#share-btn:hover,
-#export-btn:hover {
-  background-color: #d3c4f0;
 }
 
 .material-symbols-outlined {
