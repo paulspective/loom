@@ -33,7 +33,7 @@ The layout and styling are heavily inspired by **Google’s Material Design lang
 
 ## Why Loom?
 Loom was built as a lightweight, distraction-free way to capture visual ideas quickly.  
-No accounts, no clutter — just collect, arrange, and export inspiration when you need it.
+No accounts, no clutter, just collect, arrange, and export inspiration when you need it.
 
 ---
 
@@ -44,7 +44,7 @@ No accounts, no clutter — just collect, arrange, and export inspiration when y
 
 ---
 
-## 🧵 Final Thoughts
+## Final Thoughts
 Loom is small by design. Fast to use, easy to understand, and focused on visuals first.
 
 Open Loom, start weaving, and let your ideas stack up.
