@@ -162,6 +162,7 @@ body {
 }
 
 #image-url {
+  color: var(--remove-btn-hover);
   flex: 1;
   font-size: 0.9rem;
   min-width: 0;
