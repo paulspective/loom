@@ -103,3 +103,17 @@ window.addEventListener('beforeunload', e => {
 });
 
 updateEmptyMessage(images, dom.masonry);
+
+const metaThemeColor = document.querySelector("meta[name=theme-color]");
+
+function updateThemeColor() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    metaThemeColor.setAttribute("content", "#141118");
+  } else {
+    metaThemeColor.setAttribute("content", "#e2e0f9");
+  }
+}
+
+updateThemeColor();
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeColor);
