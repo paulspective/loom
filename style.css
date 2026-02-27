@@ -164,6 +164,7 @@ body {
 #image-url {
   flex: 1;
   font-size: 0.9rem;
+  color: var(--remove-btn-color);
   min-width: 0;
   max-width: 100%;
   border: none;
