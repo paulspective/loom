@@ -6,12 +6,12 @@ Loom is a simple moodboard web app that lets you collect, organize, and export i
 
 ---
 
-## 🌐 Live Demo
-👉 [Visit Loom on GitHub Pages](https://paulspective.github.io/loom/)
+## Live Demo
+[Visit Loom on GitHub Pages](https://paulspective.github.io/loom/)
 
 ---
 
-## ✨ Features
+## Features
 - Add images instantly by pasting direct image URLs
 - Upload images directly from your device
 - Smart URL validation to prevent broken images
@@ -22,7 +22,7 @@ Loom is a simple moodboard web app that lets you collect, organize, and export i
 
 ---
 
-## 🎨 Design Inspiration
+## Design Inspiration
 The layout and styling are heavily inspired by **Google’s Material Design language**, focusing on:
 - Clean, minimal surfaces
 - Rounded corners and subtle shadows
@@ -31,20 +31,20 @@ The layout and styling are heavily inspired by **Google’s Material Design lang
 
 ---
 
-## 🧠 Why Loom?
+## Why Loom?
 Loom was built as a lightweight, distraction-free way to capture visual ideas quickly.  
-No accounts, no clutter — just collect, arrange, and export inspiration when you need it.
+No accounts, no clutter, just collect, arrange, and export inspiration when you need it.
 
 ---
 
-## 📌 Notes
+## Notes
 - Images must be publicly accessible if added via URL
 - Images are stored temporarily in the session
 - Drag-and-drop reordering is intentionally excluded for now to preserve layout simplicity
 
 ---
 
-## 🧵 Final Thoughts
+## Final Thoughts
 Loom is small by design. Fast to use, easy to understand, and focused on visuals first.
 
 Open Loom, start weaving, and let your ideas stack up.
