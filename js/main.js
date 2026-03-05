@@ -61,10 +61,12 @@ dom.uploadBtn.addEventListener('click', () => {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
+  input.multiple = true;
 
   input.onchange = () => {
-    const file = input.files[0];
-    addImageFromFile(file);
+    Array.from(input.files).forEach(file => {
+      addImageFromFile(file);
+    });
   };
 
   input.click();
