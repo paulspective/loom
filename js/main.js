@@ -5,6 +5,51 @@ import { exportMoodboard, shareMoodboard } from './export.js';
 
 const images = [];
 
+// Modal
+
+function showModal({ title, message, actions }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'loom-modal-overlay';
+
+  const modal = document.createElement('div');
+  modal.className = 'loom-modal';
+
+  const titleEl = document.createElement('p');
+  titleEl.className = 'loom-modal-title';
+  titleEl.textContent = title;
+
+  const messageEl = document.createElement('p');
+  messageEl.className = 'loom-modal-message';
+  messageEl.textContent = message;
+
+  const actionsEl = document.createElement('div');
+  actionsEl.className = 'loom-modal-actions';
+
+  actions.forEach(({ label, style, onClick }) => {
+    const btn = document.createElement('button');
+    btn.textContent = label;
+    btn.className = `loom-modal-btn ${style || ''}`;
+    btn.addEventListener('click', () => {
+      overlay.remove();
+      onClick?.();
+    });
+    actionsEl.appendChild(btn);
+  });
+
+  modal.appendChild(titleEl);
+  modal.appendChild(messageEl);
+  modal.appendChild(actionsEl);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Close on overlay click
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.remove();
+  });
+}
+
+// Image Handlers 
+
 async function addImageFromURL() {
   const url = dom.urlInput.value.trim();
   if (!url) return;
@@ -48,6 +93,8 @@ function addImageFromFile(file) {
   updateEmptyMessage(images, dom.masonry);
 }
 
+// Event Listeners
+
 dom.addBtn.addEventListener('click', addImageFromURL);
 
 dom.urlInput.addEventListener('keydown', e => {
@@ -74,34 +121,80 @@ dom.uploadBtn.addEventListener('click', () => {
 
 dom.clearBtn.addEventListener('click', () => {
   if (images.length === 0) {
-    alert('Nothing to unweave yet.');
+    showModal({
+      title: 'Nothing here yet.',
+      message: 'Add some images to your weave first.',
+      actions: [
+        { label: 'Got it', style: 'primary' }
+      ]
+    });
     return;
   }
 
-  if (!confirm('Unweave everything?')) return;
+  showModal({
+    title: 'Unweave everything?',
+    message: 'This will remove all images from your board. This can\'t be undone.',
+    actions: [
+      {
+        label: 'Unweave',
+        style: 'danger',
+        onClick: () => {
+          dom.masonry
+            .querySelectorAll('.moodboard-item')
+            .forEach(item => item.remove());
 
-  dom.masonry
-    .querySelectorAll('.moodboard-item')
-    .forEach(item => item.remove());
-
-  images.length = 0;
-  updateEmptyMessage(images, dom.masonry);
+          images.length = 0;
+          updateEmptyMessage(images, dom.masonry);
+        }
+      },
+      { label: 'Cancel', style: 'primary' }
+    ]
+  });
 });
 
 dom.exportBtn.addEventListener('click', () =>
-  exportMoodboard(dom.masonry)
+  exportMoodboard(dom.masonry, showModal)
 );
 
 dom.shareBtn.addEventListener('click', () =>
-  shareMoodboard(dom.masonry)
+  shareMoodboard(dom.masonry, showModal)
 );
+
+// Unload Warning 
+
+let leaving = false;
 
 window.addEventListener('beforeunload', e => {
   const hasItems = dom.masonry.querySelector('.moodboard-item') !== null;
-  if (!hasItems) return;
+  if (!hasItems || leaving) return;
 
   e.preventDefault();
   e.returnValue = '';
+
+  showModal({
+    title: 'Your board isn\'t saved.',
+    message: 'Export your weave before leaving or you\'ll lose everything.',
+    actions: [
+      {
+        label: 'Export & Leave',
+        style: 'primary',
+        onClick: async () => {
+          await exportMoodboard(dom.masonry, showModal);
+          leaving = true;
+          window.location.reload();
+        }
+      },
+      {
+        label: 'Leave anyway',
+        style: 'danger',
+        onClick: () => {
+          leaving = true;
+          window.location.reload();
+        }
+      },
+      { label: 'Stay', style: 'ghost' }
+    ]
+  });
 });
 
 updateEmptyMessage(images, dom.masonry);
