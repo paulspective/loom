@@ -273,3 +273,85 @@ body {
   font-size: 1rem;
   user-select: none;
 }
+
+.loom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.loom-modal {
+  background: var(--bg);
+  border-radius: 24px;
+  padding: 28px 24px 20px;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  animation: fadeIn 0.2s ease;
+}
+
+.loom-modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--upload-btn-color);
+}
+
+.loom-modal-message {
+  font-size: 0.875rem;
+  color: var(--empty-msg-color);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.loom-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loom-modal-btn {
+  padding: 0.9rem 1.5rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 0.875rem;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.loom-modal-btn:active {
+  transform: scale(0.97);
+}
+
+.loom-modal-btn.primary {
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+}
+
+.loom-modal-btn.primary:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.loom-modal-btn.danger {
+  background-color: var(--upload-btn-bg);
+  color: var(--upload-btn-color);
+}
+
+.loom-modal-btn.danger:hover {
+  background-color: var(--upload-btn-hover-bg);
+}
+
+.loom-modal-btn.ghost {
+  background: transparent;
+  color: var(--empty-msg-color);
+}
