@@ -145,6 +145,10 @@ body {
   border-radius: 50px;
 }
 
+::placeholder {
+  color: var(--empty-msg-color);
+}
+
 #upload-btn {
   display: inline-flex;
   align-items: center;
@@ -251,16 +255,16 @@ body {
 }
 
 #share-btn {
-  border-radius: 50px 5px 5px 50px;
-  padding: 0.8rem 1.2rem;
-}
-
-#export-btn {
   border-radius: 5px 50px 50px 5px;
   padding: 0.8rem 0.7rem;
 }
 
-#export-btn span {
+#export-btn {
+  border-radius: 50px 5px 5px 50px;
+  padding: 0.8rem 1.2rem;
+}
+
+#share-btn span {
   margin-right: 3px;
 }
 
@@ -301,9 +305,9 @@ body {
 }
 
 .loom-modal-title {
-  font-size: 1rem;
+  font-size: 1.07rem;
   font-weight: 600;
-  color: var(--upload-btn-color);
+  color: var(--btn-hover-bg);
 }
 
 .loom-modal-message {
