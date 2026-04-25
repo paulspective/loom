@@ -1,7 +1,11 @@
-export async function exportMoodboard(masonry) {
+export async function exportMoodboard(masonry, showModal) {
   const images = masonry.querySelectorAll('img');
   if (!images.length) {
-    alert('Nothing to export yet.');
+    showModal({
+      title: 'Nothing to export.',
+      message: 'Add some images to your weave first.',
+      actions: [{ label: 'Got it', style: 'primary' }]
+    });
     return;
   }
 
@@ -16,11 +20,14 @@ export async function exportMoodboard(masonry) {
     canvas = await html2canvas(masonry, { useCORS: true, scale });
   } catch (err) {
     console.error('html2canvas failed:', err);
-    alert('Could not create export image.');
+    showModal({
+      title: 'Export failed.',
+      message: 'Something went wrong while creating your image.',
+      actions: [{ label: 'Got it', style: 'primary' }]
+    });
     return;
   }
 
-  // Utility to trigger download
   const triggerDownload = (href) => {
     const link = document.createElement('a');
     link.download = 'moodboard.png';
@@ -34,7 +41,11 @@ export async function exportMoodboard(masonry) {
     canvas.toBlob(blob => {
       if (!blob) {
         console.error('toBlob returned null');
-        alert('Export failed.');
+        showModal({
+          title: 'Export failed.',
+          message: 'Could not generate the image blob.',
+          actions: [{ label: 'Got it', style: 'primary' }]
+        });
         return;
       }
       const url = URL.createObjectURL(blob);
@@ -42,16 +53,19 @@ export async function exportMoodboard(masonry) {
       URL.revokeObjectURL(url);
     }, 'image/png');
   } else {
-    // Fallback for browsers without toBlob
     const dataUrl = canvas.toDataURL('image/png');
     triggerDownload(dataUrl);
   }
 }
 
-export async function shareMoodboard(masonry) {
+export async function shareMoodboard(masonry, showModal) {
   const images = masonry.querySelectorAll('img');
-  if (images.length === 0) {
-    alert('There\'s nothing to share yet.');
+  if (!images.length) {
+    showModal({
+      title: 'Nothing to share.',
+      message: 'Add some images to your weave first.',
+      actions: [{ label: 'Got it', style: 'primary' }]
+    });
     return;
   }
 
@@ -68,7 +82,11 @@ export async function shareMoodboard(masonry) {
       canvas.toBlob(blob => {
         if (!blob) {
           console.error('toBlob returned null');
-          alert('Share failed.');
+          showModal({
+            title: 'Share failed.',
+            message: 'Could not generate the image.',
+            actions: [{ label: 'Got it', style: 'primary' }]
+          });
           resolve();
           return;
         }
@@ -87,12 +105,15 @@ export async function shareMoodboard(masonry) {
             setTimeout(() => URL.revokeObjectURL(url), 2000);
           });
         } else {
-          alert('Sharing not supported on this device.');
+          showModal({
+            title: 'Sharing not supported.',
+            message: 'Your device or browser doesn\'t support the Share API.',
+            actions: [{ label: 'Got it', style: 'primary' }]
+          });
         }
         resolve();
       });
     } else {
-      // Fallback if toBlob is missing
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.download = 'moodboard.png';
