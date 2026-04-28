@@ -12,6 +12,7 @@
   --remove-btn-bg: #fff7ff;
   --remove-btn-color: #4b2e83;
   --empty-msg-color: #4b2e83cc;
+  --overlay-bg: rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +30,7 @@
     --remove-btn-bg: #2a1b47;
     --remove-btn-color: #c8b3fd;
     --empty-msg-color: #c8b3fdcc;
+    --overlay-bg: rgba(255, 255, 255, 0.03);
   }
 }
 
@@ -282,7 +284,7 @@ body {
 .loom-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--overlay-bg);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
