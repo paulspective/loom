@@ -33,15 +33,17 @@ export function createMoodboardItem({
           label: 'Remove',
           style: 'danger',
           onClick: () => {
-            grid.remove([muuriItem], { removeElements: true });
+            wrapper.classList.add('fade-out');
 
+            wrapper.addEventListener('animationend', () => {
+              grid.remove([muuriItem], { removeElements: true });
 
-            const index = images.indexOf(url);
-            if (index > -1) images.splice(index, 1);
+              const index = images.indexOf(url);
+              if (index > -1) images.splice(index, 1);
 
-            if (revokeOnRemove) URL.revokeObjectURL(url);
-
-            updateEmptyMessage(images);
+              if (revokeOnRemove) URL.revokeObjectURL(url);
+              updateEmptyMessage(images);
+            });
           }
         },
         { label: 'Cancel', style: 'primary' }
