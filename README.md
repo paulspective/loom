@@ -15,7 +15,7 @@ Loom is a simple moodboard web app that lets you collect, arrange, and export im
 - Add images instantly by pasting direct image URLs
 - Upload images directly from your device
 - Smart URL validation to prevent broken images
-- Drag-to-reorder images with smooth animated reflow
+- Drag-to-reorder images with smooth animated reflow (Desktop only)
 - Remove individual images via a subtle **x** action, with confirmation
 - Clear the entire moodboard in one click
 - Export the full board as a PNG
