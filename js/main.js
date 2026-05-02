@@ -8,9 +8,9 @@ const images = [];
 const grid = new Muuri(dom.masonry, {
   dragEnabled: true,
   layout: { fillGaps: true },
-  dragStartPredicate: (item, e) => {
-    if (e.deltaY > e.deltaX) return false;
-    return Muuri.ItemDrag.defaultStartPredicate(item, e, { delay: 300, distance: 10 });
+  dragStartPredicate: {
+    delay: 300,
+    distance: 10
   }
 });
 
