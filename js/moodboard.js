@@ -4,6 +4,7 @@ export function createMoodboardItem({
   url,
   images,
   grid,
+  showModal,
   revokeOnRemove = false
 }) {
   const wrapper = document.createElement('div');
@@ -19,36 +20,42 @@ export function createMoodboardItem({
   removeBtn.className = 'remove-btn';
   removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
 
-  content.append(img, removeBtn);
-  wrapper.appendChild(content);
-
-  masonry.appendChild(wrapper);
-
-  grid.add(wrapper);
-
-  let muuriItem = grid.getItem(wrapper);
+  let muuriItem = null;
 
   removeBtn.addEventListener('click', () => {
-    if (!muuriItem) {
-      console.warn("No muuriItem found for", wrapper);
-      return;
-    }
+    if (!muuriItem) return;
 
-    grid.hide(muuriItem, {
-      onFinish: () => {
-        grid.remove(muuriItem, { removeElements: true });
+    showModal({
+      title: 'Remove this image?',
+      message: 'This will remove the image from your weave.',
+      actions: [
+        {
+          label: 'Remove',
+          style: 'danger',
+          onClick: () => {
+            grid.remove([muuriItem], { removeElements: true });
 
-        const index = images.indexOf(url);
-        if (index > -1) images.splice(index, 1);
 
-        if (revokeOnRemove) URL.revokeObjectURL(url);
+            const index = images.indexOf(url);
+            if (index > -1) images.splice(index, 1);
 
-        updateEmptyMessage(images);
-      }
+            if (revokeOnRemove) URL.revokeObjectURL(url);
+
+            updateEmptyMessage(images);
+          }
+        },
+        { label: 'Cancel', style: 'primary' }
+      ]
     });
   });
 
+  content.append(img, removeBtn);
+  wrapper.appendChild(content);
+  masonry.appendChild(wrapper);
+
   img.onload = () => {
+    grid.add(wrapper);
+    muuriItem = grid.getItem(wrapper);
     grid.refreshItems().layout();
     wrapper.classList.add('fade-in');
     updateEmptyMessage(images);
