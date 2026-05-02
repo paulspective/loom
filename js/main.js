@@ -5,13 +5,11 @@ import { exportMoodboard, shareMoodboard } from './export.js';
 
 const images = [];
 
+const isMobile = window.matchMedia('(max-width: 600px)').matches;
+
 const grid = new Muuri(dom.masonry, {
-  dragEnabled: true,
-  layout: { fillGaps: true },
-  dragStartPredicate: {
-    delay: 300,
-    distance: 10
-  }
+  dragEnabled: !isMobile,
+  layout: { fillGaps: true }
 });
 
 function showModal({ title, message, actions }) {
