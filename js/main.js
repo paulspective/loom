@@ -63,7 +63,7 @@ async function addImageFromURL() {
 
   images.push(url);
 
-  createMoodboardItem({ url, images, grid });
+  createMoodboardItem({ url, images, grid, showModal });
 
   dom.urlInput.value = '';
   dom.urlInput.placeholder = 'Image URL';
@@ -75,7 +75,7 @@ function addImageFromFile(file) {
   const blobUrl = URL.createObjectURL(file);
   images.push(blobUrl);
 
-  createMoodboardItem({ url: blobUrl, images, grid, revokeOnRemove: true });
+  createMoodboardItem({ url: blobUrl, images, grid, showModal, revokeOnRemove: true });
 }
 
 dom.addBtn.addEventListener('click', addImageFromURL);
