@@ -362,3 +362,46 @@ body {
   background: transparent;
   color: var(--empty-msg-color);
 }
+
+@media (max-width: 600px) {
+
+  body {
+    justify-content: flex-start;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 16px 16px 0;
+  }
+
+  #clear-btn {
+    position: static;
+  }
+
+  .action {
+    position: static;
+  }
+
+  .input-wrapper {
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+  }
+
+  .input-area {
+    margin: 0.75rem 0 0.5rem;
+  }
+
+
+  #add-btn {
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .empty-message {
+    margin-top: 25vh;
+  }
+}
