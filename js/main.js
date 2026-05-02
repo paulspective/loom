@@ -8,11 +8,12 @@ const images = [];
 const grid = new Muuri(dom.masonry, {
   dragEnabled: true,
   layout: { fillGaps: true },
-  dragStartPredicate: {
-    delay: 700,
-    distance: 10
+  dragStartPredicate: (item, e) => {
+    if (e.deltaY > e.deltaX) return false;
+    return Muuri.ItemDrag.defaultStartPredicate(item, e, { delay: 300, distance: 10 });
   }
 });
+
 function showModal({ title, message, actions }) {
   const overlay = document.createElement('div');
   overlay.className = 'loom-modal-overlay';
