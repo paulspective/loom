@@ -9,7 +9,7 @@ const grid = new Muuri(dom.masonry, {
   dragEnabled: true,
   layout: { fillGaps: true },
   dragStartPredicate: {
-    delay: 300,
+    delay: 700,
     distance: 10
   }
 });
