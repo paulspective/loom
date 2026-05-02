@@ -37,6 +37,7 @@ export function createMoodboardItem({
 
             wrapper.addEventListener('animationend', () => {
               grid.remove([muuriItem], { removeElements: true });
+              grid.layout();
 
               const index = images.indexOf(url);
               if (index > -1) images.splice(index, 1);
