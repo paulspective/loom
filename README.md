@@ -2,7 +2,7 @@
 
 ![Material Design](https://img.shields.io/badge/Inspired%20by-Material%20Design-blue?logo=google)
 
-Loom is a simple moodboard web app that lets you collect, organize, and export images for inspiration. Add images by URL or from your device, remove them with a click, and export your entire moodboard as a PNG.
+Loom is a simple moodboard web app that lets you collect, arrange, and export images for inspiration. Add images by URL or from your device, reorder them by dragging, and export your entire moodboard as a PNG.
 
 ---
 
@@ -15,7 +15,8 @@ Loom is a simple moodboard web app that lets you collect, organize, and export i
 - Add images instantly by pasting direct image URLs
 - Upload images directly from your device
 - Smart URL validation to prevent broken images
-- Remove individual images via a subtle **x** action
+- Drag-to-reorder images with smooth animated reflow
+- Remove individual images via a subtle **x** action, with confirmation
 - Clear the entire moodboard in one click
 - Export the full board as a PNG
 - Share your moodboard via supported apps
@@ -23,11 +24,11 @@ Loom is a simple moodboard web app that lets you collect, organize, and export i
 ---
 
 ## Design Inspiration
-The layout and styling are heavily inspired by **Google’s Material Design language**, focusing on:
+The layout and styling are heavily inspired by **Google's Material Design language**, focusing on:
 - Clean, minimal surfaces
 - Rounded corners and subtle shadows
 - Responsive grid layout
-- Smooth transitions and hover effects
+- Smooth transitions and animations
 
 ---
 
@@ -40,11 +41,12 @@ No accounts, no clutter, just collect, arrange, and export inspiration when you 
 ## Notes
 - Images must be publicly accessible if added via URL
 - Images are stored temporarily in the session
-- Drag-and-drop reordering is intentionally excluded for now to preserve layout simplicity
 
 ---
 
 ## Final Thoughts
 Loom is small by design. Fast to use, easy to understand, and focused on visuals first.
+
+Open Loom, start weaving, and let your ideas stack up.
 
 Open Loom, start weaving, and let your ideas stack up.
