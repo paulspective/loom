@@ -47,7 +47,11 @@ export function createMoodboardItem({
 export function updateEmptyMessage(images, masonry) {
   const hasItems = images.length > 0;
 
-  emptyMessage.textContent = 'Nothing here yet. Start weaving.';
+  emptyMessage.innerHTML = `
+    <span class="material-symbols-outlined empty-icon">photo_library</span>
+    <span class="empty-title">Your weave is empty</span>
+    <span class="empty-sub">Paste a URL or upload an image to get started</span>
+  `;
   emptyMessage.classList.toggle('hidden', hasItems);
   masonry.classList.toggle('has-items', hasItems);
 }
