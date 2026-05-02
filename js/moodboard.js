@@ -1,4 +1,4 @@
-import { emptyMessage } from './dom.js';
+import { emptyMessage, masonry } from './dom.js';
 
 export function createMoodboardItem({
   url,
@@ -19,8 +19,20 @@ export function createMoodboardItem({
   removeBtn.className = 'remove-btn';
   removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
 
+  content.append(img, removeBtn);
+  wrapper.appendChild(content);
+
+  masonry.appendChild(wrapper);
+
+  grid.add(wrapper);
+
+  let muuriItem = grid.getItem(wrapper);
+
   removeBtn.addEventListener('click', () => {
-    const muuriItem = grid.getItems(wrapper)[0];
+    if (!muuriItem) {
+      console.warn("No muuriItem found for", wrapper);
+      return;
+    }
 
     grid.hide(muuriItem, {
       onFinish: () => {
@@ -36,11 +48,15 @@ export function createMoodboardItem({
     });
   });
 
-  content.append(img, removeBtn);
-  wrapper.appendChild(content);
-
   img.onload = () => {
-    grid.add(wrapper);
+    grid.refreshItems().layout();
+    wrapper.classList.add('fade-in');
+    updateEmptyMessage(images);
+  };
+
+  img.onerror = () => {
+    console.error("Image failed to load:", url);
+    wrapper.classList.add('broken-image');
     updateEmptyMessage(images);
   };
 }
@@ -54,25 +70,4 @@ export function updateEmptyMessage(images) {
     <span class="empty-sub">Paste a URL or upload an image to get started</span>
   `;
   emptyMessage.classList.toggle('hidden', hasItems);
-}
-        updateEmptyMessage(images, masonry);
-      },
-      { once: true }
-    );
-  });
-
-  wrapper.append(img, removeBtn);
-  masonry.appendChild(wrapper);
-}
-
-export function updateEmptyMessage(images, masonry) {
-  const hasItems = images.length > 0;
-
-  emptyMessage.innerHTML = `
-    <span class="material-symbols-outlined empty-icon">photo_library</span>
-    <span class="empty-title">Your weave is empty</span>
-    <span class="empty-sub">Paste a URL or upload an image to get started</span>
-  `;
-  emptyMessage.classList.toggle('hidden', hasItems);
-  masonry.classList.toggle('has-items', hasItems);
 }
