@@ -236,7 +236,7 @@ body {
 }
 
 .empty-message .empty-icon {
-  font-size: 2.5rem;
+  font-size: 5rem;
   opacity: 0.5;
 }
 
@@ -425,6 +425,6 @@ body {
   }
 
   .empty-message {
-    margin-top: 25vh;
+    margin-top: 20vh;
   }
 }
