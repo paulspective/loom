@@ -75,7 +75,7 @@ export function updateEmptyMessage(images) {
   const hasItems = images.length > 0;
 
   emptyMessage.innerHTML = `
-    <span class="material-symbols-outlined empty-icon">photo_library</span>
+    <span class="material-symbols-outlined empty-icon">gallery_thumbnail</span>
     <span class="empty-title">Your weave is empty</span>
     <span class="empty-sub">Paste a URL or upload an image to get started</span>
   `;
