@@ -120,9 +120,33 @@ dom.clearBtn.addEventListener('click', () => {
         label: 'Unweave',
         style: 'danger',
         onClick: () => {
-          grid.remove(grid.getItems(), { removeElements: true });
-          images.length = 0;
-          updateEmptyMessage(images);
+          const items = grid.getItems();
+          const wrappers = items.map(item => item.getElement());
+          let removedCount = 0;
+
+          const finishRemoval = () => {
+            removedCount += 1;
+            if (removedCount !== wrappers.length) return;
+
+            grid.remove(items, { removeElements: true });
+            images.length = 0;
+            updateEmptyMessage(images);
+          };
+
+          if (wrappers.length === 0) {
+            images.length = 0;
+            updateEmptyMessage(images);
+            return;
+          }
+
+          wrappers.forEach(wrapper => {
+            wrapper.classList.add('fade-out');
+            wrapper.addEventListener('transitionend', function handler(event) {
+              if (event.propertyName !== 'opacity') return;
+              wrapper.removeEventListener('transitionend', handler);
+              finishRemoval();
+            });
+          });
         }
       },
       { label: 'Cancel', style: 'primary' }
