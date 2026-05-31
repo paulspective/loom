@@ -9,7 +9,17 @@ const isMobile = window.matchMedia('(max-width: 600px)').matches;
 
 const grid = new Muuri(dom.masonry, {
   dragEnabled: !isMobile,
-  layout: { fillGaps: true }
+  layout: { fillGaps: true },
+  dragStartPredicate: { distance: 0, delay: 0 },
+  dragCssProps: { touchAction: 'none' }
+});
+
+grid.on('dragStart', (item) => {
+  item.getElement().style.opacity = '0';
+});
+
+grid.on('dragEnd', (item) => {
+  item.getElement().style.opacity = '1';
 });
 
 function showModal({ title, message, actions }) {
