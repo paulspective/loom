@@ -5,17 +5,15 @@ import { exportMoodboard, shareMoodboard } from './export.js';
 
 const images = [];
 
-const isMobile = window.matchMedia('(max-width: 600px)').matches;
-
 const grid = new Muuri(dom.masonry, {
-  dragEnabled: !isMobile,
+  dragEnabled: true,
   layout: { fillGaps: true },
-  dragStartPredicate: { distance: 0, delay: 0 },
+  dragStartPredicate: { distance: 10, delay: 0, handle: '.item-content' },
   dragCssProps: { touchAction: 'none' }
 });
 
 grid.on('dragStart', (item) => {
-  item.getElement().style.opacity = '0';
+  item.getElement().style.opacity = '0.85';
 });
 
 grid.on('dragEnd', (item) => {
@@ -135,10 +133,14 @@ dom.clearBtn.addEventListener('click', () => {
           let removedCount = 0;
 
           const finishRemoval = () => {
+            const blobUrls = wrappers.map(wrapper => wrapper.querySelector('img')?.src)
+              .filter(src => src?.startsWith('blob:'));
+
             removedCount += 1;
             if (removedCount !== wrappers.length) return;
 
             grid.remove(items, { removeElements: true });
+            blobUrls.forEach(url => URL.revokeObjectURL(url));
             images.length = 0;
             updateEmptyMessage(images);
           };
@@ -172,39 +174,12 @@ dom.shareBtn.addEventListener('click', () =>
   shareMoodboard(dom.masonry, showModal)
 );
 
-let leaving = false;
-
 window.addEventListener('beforeunload', e => {
   const hasItems = grid.getItems().length > 0;
-  if (!hasItems || leaving) return;
+  if (!hasItems) return;
 
   e.preventDefault();
   e.returnValue = '';
-
-  showModal({
-    title: 'Your board isn\'t saved.',
-    message: 'Export your weave before leaving or you\'ll lose everything.',
-    actions: [
-      {
-        label: 'Export & Leave',
-        style: 'primary',
-        onClick: async () => {
-          await exportMoodboard(dom.masonry, showModal);
-          leaving = true;
-          window.location.reload();
-        }
-      },
-      {
-        label: 'Leave anyway',
-        style: 'danger',
-        onClick: () => {
-          leaving = true;
-          window.location.reload();
-        }
-      },
-      { label: 'Stay', style: 'ghost' }
-    ]
-  });
 });
 
 updateEmptyMessage(images);
