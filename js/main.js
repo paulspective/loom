@@ -1,4 +1,5 @@
 import * as dom from './dom.js';
+import * as storage from './storage.js';
 import { validateImage } from './validation.js';
 import { createMoodboardItem, updateEmptyMessage } from './moodboard.js';
 import { exportMoodboard, shareMoodboard } from './export.js';
@@ -18,7 +19,36 @@ grid.on('dragStart', (item) => {
 
 grid.on('dragEnd', (item) => {
   item.getElement().style.opacity = '1';
+  // save layout order whenever user finishes dragging
+  saveGridOrder();
 });
+
+grid.on('layoutEnd', () => {
+  // save grid order after layout completes (after items load or are repositioned)
+  saveGridOrder();
+});
+
+function showToast(message, duration = 2500) {
+  const toast = document.createElement('div');
+  toast.className = 'loom-toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 50);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
+function saveGridOrder() {
+  const order = grid.getItems().map(item => {
+    const el = item.getElement();
+    return el.dataset.entryId || null;
+  }).filter(Boolean);
+  if (order.length > 0) {
+    storage.updateEntryOrder(order);
+  }
+}
 
 function showModal({ title, message, actions }) {
   const overlay = document.createElement('div');
@@ -71,21 +101,65 @@ async function addImageFromURL() {
     return;
   }
 
-  images.push(url);
+  let entry;
+  try { entry = storage.addEntry({ type: 'url', url }); } catch (e) { console.warn('persist failed', e); }
 
-  createMoodboardItem({ url, images, grid, showModal });
+  images.push(url);
+  createMoodboardItem({ url, images, grid, showModal, meta: { entryId: entry?.id } });
 
   dom.urlInput.value = '';
   dom.urlInput.placeholder = 'Image URL';
 }
 
-function addImageFromFile(file) {
+async function createThumbnail(file, maxDim = 400) {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const ratio = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const w = Math.round(img.width * ratio);
+        const h = Math.round(img.height * ratio);
+        const c = document.createElement('canvas');
+        c.width = w;
+        c.height = h;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        try {
+          const dataUrl = c.toDataURL('image/jpeg', 0.8);
+          resolve(dataUrl);
+        } catch (err) {
+          reject(err);
+        }
+      };
+      img.onerror = reject;
+      img.src = fr.result;
+    };
+    fr.onerror = reject;
+    fr.readAsDataURL(file);
+  });
+}
+
+async function addImageFromFile(file) {
   if (!file || !file.type.startsWith('image/')) return;
 
-  const blobUrl = URL.createObjectURL(file);
-  images.push(blobUrl);
+  // create a small thumbnail for persistence (compact hybrid)
+  let thumb;
+  try {
+    thumb = await createThumbnail(file, 400);
+  } catch (err) {
+    console.warn('thumbnail failed, falling back to blob URL', err);
+  }
 
-  createMoodboardItem({ url: blobUrl, images, grid, showModal, revokeOnRemove: true });
+  if (thumb) {
+    const entry = storage.addEntry({ type: 'thumb', dataUrl: thumb, name: file.name, size: file.size });
+    images.push(thumb);
+    createMoodboardItem({ url: thumb, images, grid, showModal, revokeOnRemove: false, meta: { entryId: entry.id, isThumb: true } });
+  } else {
+    const blobUrl = URL.createObjectURL(file);
+    images.push(blobUrl);
+    createMoodboardItem({ url: blobUrl, images, grid, showModal, revokeOnRemove: true });
+  }
 }
 
 dom.addBtn.addEventListener('click', addImageFromURL);
@@ -142,6 +216,8 @@ dom.clearBtn.addEventListener('click', () => {
             grid.remove(items, { removeElements: true });
             blobUrls.forEach(url => URL.revokeObjectURL(url));
             images.length = 0;
+            // clear persisted state since all items are removed
+            try { storage.clearState(); } catch (err) { console.warn('clearState failed', err); }
             updateEmptyMessage(images);
           };
 
@@ -174,12 +250,40 @@ dom.shareBtn.addEventListener('click', () =>
   shareMoodboard(dom.masonry, showModal)
 );
 
-window.addEventListener('beforeunload', e => {
-  const hasItems = grid.getItems().length > 0;
-  if (!hasItems) return;
+// restore persisted state (URLs and thumbnails)
+function restoreState() {
+  const state = storage.loadState();
+  const order = storage.getEntryOrder();
+  let itemCount = 0;
 
-  e.preventDefault();
-  e.returnValue = '';
-});
+  if (state && state.length) {
+    // sort entries by saved order if available
+    let sorted = state;
+    if (order && order.length) {
+      sorted = state.sort((a, b) => {
+        const aIdx = order.indexOf(a.id);
+        const bIdx = order.indexOf(b.id);
+        return (aIdx === -1 ? 999 : aIdx) - (bIdx === -1 ? 999 : bIdx);
+      });
+    }
 
-updateEmptyMessage(images);
+    sorted.forEach(entry => {
+      if (entry.type === 'url' && entry.url) {
+        images.push(entry.url);
+        createMoodboardItem({ url: entry.url, images, grid, showModal, meta: { entryId: entry.id } });
+        itemCount++;
+      } else if (entry.type === 'thumb' && entry.dataUrl) {
+        images.push(entry.dataUrl);
+        createMoodboardItem({ url: entry.dataUrl, images, grid, showModal, revokeOnRemove: false, meta: { entryId: entry.id, isThumb: true } });
+        itemCount++;
+      }
+    });
+
+    if (itemCount > 0) {
+      showToast(`Restored ${itemCount} image${itemCount !== 1 ? 's' : ''} from your weave`);
+    }
+  }
+  updateEmptyMessage(images);
+}
+
+restoreState();
