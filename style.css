@@ -453,6 +453,26 @@ body {
   letter-spacing: 0.6px;
 }
 
+/* Toast notification */
+.loom-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+.loom-toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 600px) {
 
   body {
