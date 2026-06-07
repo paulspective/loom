@@ -48,5 +48,3 @@ No accounts, no clutter, just collect, arrange, and export inspiration when you 
 Loom is small by design. Fast to use, easy to understand, and focused on visuals first.
 
 Open Loom, start weaving, and let your ideas stack up.
-
-Open Loom, start weaving, and let your ideas stack up.
