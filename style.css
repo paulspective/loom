@@ -83,6 +83,7 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
+  touch-action: none;
 }
 
 .item-content img {
