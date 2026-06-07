@@ -404,6 +404,55 @@ body {
   color: var(--empty-msg-color);
 }
 
+/* Broken image overlay */
+.broken-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  border-radius: 20px;
+}
+
+.broken-overlay .broken-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.broken-overlay .broken-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.broken-overlay .loom-modal-btn.primary {
+  background: rgba(255,255,255,0.12);
+  color: var(--btn-color);
+}
+
+.moodboard-item.broken-image img {
+  filter: grayscale(80%) contrast(0.9);
+  opacity: 0.9;
+}
+
+/* Thumbnail marker for persisted local previews */
+.moodboard-item.needs-full::after {
+  content: 'preview';
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
 @media (max-width: 600px) {
 
   body {
