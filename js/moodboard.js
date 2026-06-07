@@ -15,6 +15,8 @@ export function createMoodboardItem({
 
   const img = document.createElement('img');
   img.src = url;
+  img.draggable = false;
+  img.addEventListener('dragstart', event => event.preventDefault());
 
   const removeBtn = document.createElement('button');
   removeBtn.className = 'remove-btn';
@@ -35,7 +37,10 @@ export function createMoodboardItem({
           onClick: () => {
             wrapper.classList.add('fade-out');
 
-            wrapper.addEventListener('animationend', () => {
+            wrapper.addEventListener('transitionend', function handler(event) {
+              if (event.propertyName !== 'opacity') return;
+              wrapper.removeEventListener('transitionend', handler);
+
               grid.remove([muuriItem], { removeElements: true });
               grid.layout();
 
