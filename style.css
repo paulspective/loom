@@ -251,6 +251,19 @@ body {
   opacity: 0.75;
 }
 
+.empty-upload-btn {
+  margin-top: 8px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  background: var(--upload-btn-bg);
+  color: var(--upload-btn-color);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
 .hidden {
   display: none;
 }
