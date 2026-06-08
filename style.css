@@ -438,21 +438,6 @@ body {
   opacity: 0.9;
 }
 
-/* Thumbnail marker for persisted local previews */
-.moodboard-item.needs-full::after {
-  content: 'preview';
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-}
-
 /* Toast notification */
 .loom-toast {
   position: fixed;
