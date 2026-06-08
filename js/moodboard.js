@@ -165,13 +165,24 @@ export function createMoodboardItem({
   };
 }
 
-export function updateEmptyMessage(images) {
+export function updateEmptyMessage(images, onUploadClick) {
   const hasItems = images.length > 0;
 
   emptyMessage.innerHTML = `
     <span class="material-symbols-outlined empty-icon">gallery_thumbnail</span>
     <span class="empty-title">Your weave is empty</span>
     <span class="empty-sub">Paste a URL or upload an image to get started</span>
+    <button class="empty-upload-btn" type="button">Upload image</button>
   `;
+
+  const uploadBtn = emptyMessage.querySelector('.empty-upload-btn');
+  const uploadAction = typeof onUploadClick === 'function'
+    ? onUploadClick
+    : () => document.getElementById('upload-btn')?.click();
+
+  if (uploadBtn) {
+    uploadBtn.addEventListener('click', uploadAction);
+  }
+
   emptyMessage.classList.toggle('hidden', hasItems);
 }
