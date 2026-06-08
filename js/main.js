@@ -171,7 +171,7 @@ dom.urlInput.addEventListener('keydown', e => {
   }
 });
 
-dom.uploadBtn.addEventListener('click', () => {
+function openFilePicker() {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*';
@@ -182,7 +182,9 @@ dom.uploadBtn.addEventListener('click', () => {
   };
 
   input.click();
-});
+}
+
+dom.uploadBtn.addEventListener('click', openFilePicker);
 
 dom.clearBtn.addEventListener('click', () => {
   if (images.length === 0) {
@@ -218,12 +220,12 @@ dom.clearBtn.addEventListener('click', () => {
             images.length = 0;
             // clear persisted state since all items are removed
             try { storage.clearState(); } catch (err) { console.warn('clearState failed', err); }
-            updateEmptyMessage(images);
+            updateEmptyMessage(images, openFilePicker);
           };
 
           if (wrappers.length === 0) {
             images.length = 0;
-            updateEmptyMessage(images);
+            updateEmptyMessage(images, openFilePicker);
             return;
           }
 
@@ -283,7 +285,7 @@ function restoreState() {
       showToast(`Restored ${itemCount} image${itemCount !== 1 ? 's' : ''} from your weave`);
     }
   }
-  updateEmptyMessage(images);
+  updateEmptyMessage(images, openFilePicker);
 }
 
 restoreState();
