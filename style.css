@@ -484,62 +484,7 @@ body {
     justify-content: flex-start;
   }
 
-  .input-wrapper {
-    max-width: 100%;
-    padding: 0.75rem 1rem;
-  }
-
-  .input-area {
-    padding: 0 0 0 0.1rem;
-    margin: 0.75rem 0 0.5rem;
-  }
-
-  #upload-btn {
-    font-size: 1rem;
-    padding: 0.6rem;
-    margin-left: 0.2rem;
-  }
-
-  .btn-text {
-    font-size: 0.8rem;
-  }
-
-  #share-btn .material-symbols-outlined {
-    font-size: 20px !important;
-  }
-
-  #export-btn .material-symbols-outlined {
-    font-size: 20px !important;
-  }
-
-  #clear-btn .material-symbols-outlined {
-    font-size: 20px !important;
-  }
-
-  #clear-btn {
-    padding: 0.55rem 0.75rem;
-  }
-
-  #add-btn {
-    padding: 0.95rem 1.2rem;
-    font-size: 0.82rem;
-    white-space: nowrap;
-  }
-
   .empty-message {
     margin-top: 20vh;
-  }
-
-  .empty-message .empty-title {
-    font-size: 0.9rem;
-  }
-
-  .empty-message .empty-sub {
-    font-size: 0.75rem;
-  }
-
-  .empty-upload-btn {
-    padding: 0.75rem 1.2rem;
-    font-size: 0.9rem;
   }
 }
