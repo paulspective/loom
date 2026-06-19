@@ -214,7 +214,7 @@ body {
   border: none;
   background: transparent;
   outline: none;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 #add-btn {
@@ -279,7 +279,8 @@ body {
   cursor: pointer;
   background-color: var(--upload-btn-bg);
   color: var(--upload-btn-color);
-  padding: 0.8rem 0.9rem;
+  padding: 0.8rem;
+  font-size: 1rem;
   border-radius: 50%;
   transition: background-color 0.2s;
 }
@@ -289,7 +290,6 @@ body {
 }
 
 #clear-btn span {
-  font-size: 1.5rem;
   vertical-align: middle;
 }
 
